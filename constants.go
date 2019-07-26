@@ -31,10 +31,10 @@ var xiToPMinus1Over2 = &gfP2{gfP{0x19da71333653ee20, 0x7eaaf34fc6ed6019, 0xc4ba3
 // xiToPSquaredMinus1Over3 is ξ^((p²-1)/3) where ξ = i+3.
 var xiToPSquaredMinus1Over3 = &gfP{0x12d3cef5e1ada57d, 0xe2eca1463753babb, 0xca41e40ddccf750, 0x551337060397e04c}
 
-// xiTo2PSquaredMinus2Over3 is ξ^((2p²-2)/3) where ξ = i+3 (a cubic root of unity, mod p).
+// xiTo2PSquaredMinus2Over3 is ξ^((2p²-2)/3) where ξ = i+3 (a cubic root of unity, mod P).
 var xiTo2PSquaredMinus2Over3 = &gfP{0x3642364f386c1db8, 0xe825f92d2acd661f, 0xf2aba7e846c19d14, 0x5a0bcea3dc52b7a0}
 
-// xiToPSquaredMinus1Over6 is ξ^((1p²-1)/6) where ξ = i+3 (a cubic root of -1, mod p).
+// xiToPSquaredMinus1Over6 is ξ^((1p²-1)/6) where ξ = i+3 (a cubic root of -1, mod P).
 var xiToPSquaredMinus1Over6 = &gfP{0xe21a761d259c78af, 0x6358fa3f5e84f7e, 0xb7c444d01ac33f0d, 0x35a9333f6e50d058}
 
 // xiTo2PMinus2Over3 is ξ^((2p-2)/3) where ξ = i+3.

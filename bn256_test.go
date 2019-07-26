@@ -6,6 +6,8 @@ import (
 	"bytes"
 	"crypto/rand"
 
+	"math/big"
+
 	"golang.org/x/crypto/bn256"
 )
 
@@ -126,7 +128,7 @@ func TestBilinearity(t *testing.T) {
 		e2.ScalarMult(e2, a)
 		e2.ScalarMult(e2, b)
 
-		if *e1.p != *e2.p {
+		if *e1.P != *e2.P {
 			t.Fatalf("bad pairing result: %s", e1)
 		}
 	}
@@ -160,7 +162,60 @@ func TestTripartiteDiffieHellman(t *testing.T) {
 	k3Bytes := k3.Marshal()
 
 	if !bytes.Equal(k1Bytes, k2Bytes) || !bytes.Equal(k2Bytes, k3Bytes) {
-		t.Errorf("keys didn't agree")
+		t.Errorf("keys didn'T agree")
+	}
+}
+
+func TestGfPSqrt(t *testing.T) {
+	// test square root function in gfP
+	s, err := rand.Int(rand.Reader, p)
+
+	ss := new(big.Int).Mul(s, s)
+	ss.Mod(ss, p)
+	sMinus := new(big.Int).Neg(s)
+	sMinus.Mod(sMinus, p)
+
+	a, aa, aaSqrt := &gfP{}, &gfP{}, &gfP{}
+	a.SetInt(s)
+	gfpMul(aa, a, a)
+
+	aaSqrt.Sqrt(aa)
+	ssSqrt, err := aaSqrt.ToInt()
+	if err != nil {
+		t.Errorf("convertion failed: %v", err)
+	}
+
+	if ssSqrt.Cmp(s) != 0 && ssSqrt.Cmp(sMinus) != 0 {
+		t.Errorf("wrong result for GfP")
+	}
+
+	// test square root function in gfP2
+	a2 := &gfP2{*a, *aa}
+
+	a2a2, a2a2Sqrt, a2Minus := &gfP2{}, &gfP2{}, &gfP2{}
+	a2a2.Mul(a2, a2)
+	a2Minus.Neg(a2)
+
+	_, err = a2a2Sqrt.Sqrt(a2a2)
+
+	if a2.String() != a2a2Sqrt.String() && a2Minus.String() != a2a2Sqrt.String() {
+		t.Errorf("wrong result for GfP2")
+	}
+}
+
+func TestHashToG1(t *testing.T) {
+	s := "foo bar"
+	_, err := HashG1(s)
+	if err != nil {
+		t.Errorf("hashing failed: %v", err)
+	}
+}
+
+func TestHashToG2(t *testing.T) {
+	s := "foo bar"
+	_, err := HashG2(s)
+	if err != nil {
+		t.Errorf("hashing failed: %v", err)
 	}
 }
 
