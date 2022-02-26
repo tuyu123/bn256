@@ -7,6 +7,15 @@ import (
 
 type gfP [4]uint64
 
+func CreateGfp(in [4]uint64) *gfP {
+	out := &gfP{}
+	out[0] = in[0]
+	out[1] = in[1]
+	out[2] = in[2]
+	out[3] = in[3]
+	return out
+}
+
 func newGFp(x int64) (out *gfP) {
 	if x >= 0 {
 		out = &gfP{uint64(x)}
