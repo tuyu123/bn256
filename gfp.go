@@ -7,7 +7,7 @@ import (
 
 type gfP [4]uint64
 
-func CreateGfp(in [4]uint64) *gfP {
+func CreateGfp(in []uint64) *gfP {
 	out := &gfP{}
 	out[0] = in[0]
 	out[1] = in[1]
