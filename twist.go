@@ -1,8 +1,8 @@
 package bn256
 
 import (
-	"math/big"
 	"errors"
+	"math/big"
 )
 
 // twistPoint implements the elliptic curve Y²=X³+3/ξ over GF(p²). Points are
@@ -10,6 +10,15 @@ import (
 // n-torsion points of this curve over GF(p²) (where n = Order)
 type twistPoint struct {
 	X, Y, Z, T gfP2
+}
+
+func CreateTwistPoint() *twistPoint{
+	return &twistPoint{
+		X: gfP2{},
+		Y: gfP2{},
+		Z: gfP2{},
+		T: gfP2{},
+	}
 }
 
 var twistB = &gfP2{

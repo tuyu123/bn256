@@ -14,6 +14,10 @@ type gfP12 struct {
 	X, Y gfP6 // value is xω + Y
 }
 
+func CreateGfP12() *gfP12{
+	return &gfP12{}
+}
+
 var gfP12Gen *gfP12 = &gfP12{
 	X: gfP6{
 		X: gfP2{

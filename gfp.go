@@ -7,8 +7,17 @@ import (
 
 type gfP [4]uint64
 
-func CreateGfp(in []uint64) *gfP {
+func EncodeGfp(in []uint64) *gfP {
 	out := &gfP{}
+	out[0] = in[0]
+	out[1] = in[1]
+	out[2] = in[2]
+	out[3] = in[3]
+	return out
+}
+
+func DecodeGfp(in *gfP) []uint64 {
+	out := make([]uint64, 4)
 	out[0] = in[0]
 	out[1] = in[1]
 	out[2] = in[2]
