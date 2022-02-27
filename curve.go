@@ -10,6 +10,15 @@ type curvePoint struct {
 	X, Y, Z, T gfP
 }
 
+func CreateCurvePoint() *curvePoint {
+	return &curvePoint{
+		X: gfP{},
+		Y: gfP{},
+		Z: gfP{},
+		T: gfP{},
+	}
+}
+
 var curveB = newGFp(3)
 
 // curveGen is the generator of G₁.
