@@ -443,6 +443,10 @@ type GT struct {
 	P *gfP12
 }
 
+func GetGTByK(k *big.Int) *GT {
+	return new(GT).ScalarBaseMult(k)
+}
+
 // RandomGT returns X and e(g₁, g₂)ˣ where X is a random, non-zero number read
 // from r.
 func RandomGT(r io.Reader) (*big.Int, *GT, error) {
